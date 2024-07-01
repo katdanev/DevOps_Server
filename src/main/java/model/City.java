@@ -1,27 +1,30 @@
 package model;
 
+import java.util.List;
+import java.util.Objects;
+
 public class City {
     private Long id;
     private String name;
     private String province;
     private int population;
+    private List<Airport> airports;  // Added relationship with airports
+    private List<Passenger> passengers;  // Added relationship with passengers
 
-
-    // Constructors - do we need to add that?
-
+    // Constructors
     public City() {
     }
 
-    public City(Long id, String name, String province, int population) {
+    public City(Long id, String name, String province, int population, List<Airport> airports, List<Passenger> passengers) {
         this.id = id;
         this.name = name;
         this.province = province;
         this.population = population;
+        this.airports = airports;
+        this.passengers = passengers;
     }
 
     // Getters and Setters
-
-
     public Long getId() {
         return id;
     }
@@ -54,7 +57,45 @@ public class City {
         this.population = population;
     }
 
-    // Do we need to add   toString(), equals() та hashCode() ???
+    public List<Airport> getAirports() {
+        return airports;
+    }
 
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
+    }
 
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    // toString(), equals() and hashCode() methods are recommended for proper collection and debugging usage
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", province='" + province + '\'' +
+                ", population=" + population +
+                ", airports=" + airports +
+                ", passengers=" + passengers +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return population == city.population && id.equals(city.id) && name.equals(city.name) && province.equals(city.province) && Objects.equals(airports, city.airports) && Objects.equals(passengers, city.passengers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, province, population, airports, passengers);
+    }
 }

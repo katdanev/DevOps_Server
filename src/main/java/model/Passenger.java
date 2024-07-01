@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Passenger {
 
@@ -11,8 +12,20 @@ public class Passenger {
     private City city;
     private List<Aircraft> aircraftList;
 
-    // Getters and setters
+    // Constructors
+    public Passenger() {
+    }
 
+    public Passenger(int id, String firstName, String lastName, String phoneNumber, City city, List<Aircraft> aircraftList) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.aircraftList = aircraftList;
+    }
+
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -52,12 +65,38 @@ public class Passenger {
     public void setCity(City city) {
         this.city = city;
     }
-// new
+
     public List<Aircraft> getAircraftList() {
         return aircraftList;
     }
-//new
+
     public void setAircraftList(List<Aircraft> aircraftList) {
         this.aircraftList = aircraftList;
     }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", city=" + city +
+                ", aircraftList=" + aircraftList +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Passenger passenger = (Passenger) o;
+        return id == passenger.id && Objects.equals(firstName, passenger.firstName) && Objects.equals(lastName, passenger.lastName) && Objects.equals(phoneNumber, passenger.phoneNumber) && Objects.equals(city, passenger.city) && Objects.equals(aircraftList, passenger.aircraftList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, phoneNumber, city, aircraftList);
+    }
 }
+

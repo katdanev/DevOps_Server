@@ -10,35 +10,29 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/airport")
 public class AirportController {
 
     @Autowired
     private AirportService airportService;
 
     // Get Airport with params
-    // http://localhost:8080/airport
-    // http://localhost:8080/airport?id=1&name=Heathrow&code=LHR&cityId=1&cityName=London&cityProvince=Greater London&cityPopulation=8900000
-    @GetMapping("/airport")
+    @PostMapping("/generate")
     public Airport airport(@RequestParam(value = "id", required = false) int id,
                            @RequestParam(value = "name", required = false) String name,
                            @RequestParam(value = "code", required = false) String code,
-                           @RequestParam(value = "cityId", required = false) Long cityId,
-                           @RequestParam(value = "cityName", required = false) String cityName,
-                           @RequestParam(value = "cityProvince", required = false) String cityProvince,
-                           @RequestParam(value = "cityPopulation", required = false, defaultValue = "0") int cityPopulation) {
-
-        City city = new City(cityId, cityName, cityProvince, cityPopulation);
+                           @RequestBody City city) {
         return airportService.generateAirport(id, name, code, city);
     }
 
-    // http://localhost:8080/airport/1
-    @GetMapping("/airport/{id}")
+    // Get airport by ID
+    @GetMapping("/{id}")
     public Airport getAirport(@PathVariable int id) {
         return airportService.getAirport(id);
     }
 
-    // http://localhost:8080/airports - get a list of airports
-    @GetMapping("/airports")
+    // Get all airports
+    @GetMapping
     public List<Airport> getAllAirports(@RequestParam(value = "city", required = false) String cityName) {
         if (cityName != null) {
             return airportService.getAirportsByCity(cityName);
@@ -47,22 +41,21 @@ public class AirportController {
         }
     }
 
-
-    // http://localhost:8080/airport - post a new json airport object
-    @PostMapping("/airport")
+    // Create a new airport
+    @PostMapping
     public Airport createAirport(@RequestBody Airport newAirport) {
         return airportService.createAirport(newAirport);
     }
 
-    // http://localhost:8080/airport/1 - put new value in created json object
-    @PutMapping("/airport/{id}")
+    // Update an airport by ID
+    @PutMapping("/{id}")
     public Airport updateAirport(@PathVariable int id, @RequestBody Airport updatedAirport) {
         return airportService.updateAirport(id, updatedAirport);
     }
 
-    // http://localhost:8080/airport/1 - delete a specific json object by id
-//    @DeleteMapping("/airport/{id}")
-//    public void deleteAirport(@PathVariable int id) {
-//        airportService.deleteAirport(id);
-   // }
+    // Delete an airport by ID
+    @DeleteMapping("/{id}")
+    public void deleteAirport(@PathVariable int id) {
+        airportService.deleteAirport(id);
+    }
 }

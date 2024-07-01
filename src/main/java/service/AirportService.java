@@ -1,7 +1,5 @@
 package service;
 
-
-
 import model.Airport;
 import model.City;
 import org.springframework.stereotype.Service;
@@ -14,11 +12,7 @@ public class AirportService {
     private List<Airport> airports = new ArrayList<>();
 
     public Airport generateAirport(int id, String name, String code, City city) {
-        Airport airport = new Airport();
-        airport.setId(id);
-        airport.setName(name);
-        airport.setCode(code);
-        airport.setCity(city);
+        Airport airport = new Airport(id, name, code, city);
         airports.add(airport);
         return airport;
     }
@@ -46,7 +40,10 @@ public class AirportService {
         return null;
     }
 
-    // new
+    public void deleteAirport(int id) {
+        airports.removeIf(airport -> airport.getId() == id);
+    }
+
     public List<Airport> getAirportsByCity(String cityName) {
         List<Airport> airportsInCity = new ArrayList<>();
         for (Airport airport : airports) {
@@ -56,5 +53,5 @@ public class AirportService {
         }
         return airportsInCity;
     }
-
 }
+
