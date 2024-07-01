@@ -26,7 +26,7 @@ public class AircraftController {
     public Aircraft getAircraft(@PathVariable int index) {
         return aircraftService.getAircraft(index);
     }
-    // Create new aircraft
+    // Create new aircraft http://localhost:8080/aircraft
     @PostMapping
     public Aircraft createAircraft(@RequestBody Aircraft newAircraft) {
         return aircraftService.createAircraft(newAircraft);
@@ -44,4 +44,3 @@ public class AircraftController {
         aircraftService.deleteAircraft(index);
     }
 }
-

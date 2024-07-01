@@ -16,7 +16,7 @@ public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
-    //  GET all Passengers http://localhost:8080/passenger
+    // GET all Passengers http://localhost:8080/passenger
     @GetMapping
     public List<Passenger> getAllPassengers() {
         return passengerService.getAllPassengers();
@@ -40,13 +40,13 @@ public class PassengerController {
         return passengerService.createPassenger(newPassenger);
     }
 
-    //  PUT Passenger http://localhost:8080/passenger/{index}
+    // PUT Passenger http://localhost:8080/passenger/{index}
     @PutMapping("/{index}")
     public Passenger updatePassenger(@PathVariable Integer index, @RequestBody Passenger updatedPassenger) {
         return passengerService.updatePassenger(index, updatedPassenger);
     }
 
-    //  DELETE Passengers by index http://localhost:8080/passenger/{index}
+    // DELETE Passengers by index http://localhost:8080/passenger/{index}
     @DeleteMapping("/{index}")
     public void deletePassenger(@PathVariable Integer index) {
         passengerService.deletePassenger(index);

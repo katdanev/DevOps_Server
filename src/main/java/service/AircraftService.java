@@ -15,7 +15,10 @@ public class AircraftService {
     }
 
     public Aircraft getAircraft(int index) {
-        return aircrafts.get(index);
+        if (index >= 0 && index < aircrafts.size()) {
+            return aircrafts.get(index);
+        }
+        return null;
     }
 
     public Aircraft createAircraft(Aircraft newAircraft) {
@@ -24,11 +27,16 @@ public class AircraftService {
     }
 
     public Aircraft updateAircraft(int index, Aircraft updatedAircraft) {
-        aircrafts.set(index, updatedAircraft);
-        return updatedAircraft;
+        if (index >= 0 && index < aircrafts.size()) {
+            aircrafts.set(index, updatedAircraft);
+            return updatedAircraft;
+        }
+        return null;
     }
 
     public void deleteAircraft(int index) {
-        aircrafts.remove(index);
+        if (index >= 0 && index < aircrafts.size()) {
+            aircrafts.remove(index);
+        }
     }
 }
